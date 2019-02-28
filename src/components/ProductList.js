@@ -6,7 +6,7 @@ export class ProductList extends Component {
         super(props)
         
         this.state = {
-            products:[]
+            products:[],
         }
         this.data = [
             {
@@ -14,7 +14,7 @@ export class ProductList extends Component {
                 title: 'Yellow Pail',
                 description: 'On-demand sand castle construction expertise.',
                 url: '#',
-            //   votes: generateVoteCount(),
+                votes: 0,
                 submitterAvatarUrl: 'https://via.placeholder.com/50',
                 productImageUrl: 'https://via.placeholder.com/50',
             
@@ -24,33 +24,52 @@ export class ProductList extends Component {
                 title: 'Yellow Pail 2',
                 description: 'On-demand sand castle construction expertise. On-demand sand castle construction expertise.',
                 url: '#',
-            //   votes: generateVoteCount(),
+                votes: 1,
                 submitterAvatarUrl: 'https://via.placeholder.com/50',
                 productImageUrl: 'https://via.placeholder.com/50',
         
             },
         ]
+        this.handleProductUpVote=this.handleProductUpVote.bind(this);
     }
 
     componentDidMount(){
+        console.log("11");
         this.setState({
-            product: this.data
+            products: this.data
         });
-        console.log(this.state.product);
+        console.log(this.state.products);
     }
 
     handleProductUpVote(productId){
         console.log(productId + " was upvoted!");
+        const products = this.state.products;
+        const nextProducts = this.state.products.map((product)=>{
+            if(products.id === productId){
+                return Object.assign({},product,{
+                    votes: product.votes + 1
+                })
+               
+            }else {
+                return products;
+            }
+        })
+       
+        this.setState({
+            products: nextProducts
+
+        })
     }
     
     render(){
-        
+      
         const productComponents = this.data.map((product, index)=>{
             return(
                 <Product key={index}
                     id={product.id}
                     title={product.title}
                     description={product.description}
+                    votes={product.votes}
                     url={product.url}                    
                     submitterAvatarUrl={product.submitterAvatarUrl}
                     productImageUrl={product.productImageUrl}
