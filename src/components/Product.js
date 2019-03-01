@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 
 export class Product extends Component {
     constructor(props) {
-      super(props)
-    
+      super(props);
       this.state = {
-         
+          votes: props.votes
       }
       this.handleUpVote = this.handleUpVote.bind(this);
     }
     
     
     handleUpVote(){
-        this.props.onVote(this.props.id);
+       this.props.onVote(this.props.id);
     }
     
     render(){
@@ -29,8 +28,8 @@ export class Product extends Component {
                     <div className="description">
                         <a href={this.props.url}>{this.props.title}</a>
                         <p>{this.props.description}</p>
-                        <a>{this.props.votes}</a>
-                        <button  onClick={this.handleUpVote}>Tăng lượt</button>
+                        <p>{this.props.votes}</p>
+                        <button onClick={this.handleUpVote}>Tăng lượt</button>
                     </div>
                     <div className="extra">
                         <span>Submitted by:</span>
@@ -38,6 +37,9 @@ export class Product extends Component {
 
                     </div>
                 </div>
+                <br/>
+                <hr/>
+                <br/>
             </div>
         )
     }

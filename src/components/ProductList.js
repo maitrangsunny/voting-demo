@@ -3,7 +3,7 @@ import { Product } from './Product';
 
 export class ProductList extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         
         this.state = {
             products:[],
@@ -34,36 +34,28 @@ export class ProductList extends Component {
     }
 
     componentDidMount(){
-        console.log("11");
         this.setState({
             products: this.data
         });
-        console.log(this.state.products);
     }
 
     handleProductUpVote(productId){
-        console.log(productId + " was upvoted!");
-        const products = this.state.products;
-        const nextProducts = this.state.products.map((product)=>{
-            if(products.id === productId){
-                return Object.assign({},product,{
-                    votes: product.votes + 1
-                })
-               
-            }else {
-                return products;
-            }
-        })
-       
-        this.setState({
-            products: nextProducts
-
-        })
+        const cloneData = this.state.products.map(product=>{
+           if(productId === product.id){
+               return Object.assign({},product,{
+                   votes: product.votes + 1,
+               });
+           }else {
+               return product;
+           }
+       });
+       this.setState({
+           products: cloneData
+       });
     }
     
-    render(){
-      
-        const productComponents = this.data.map((product, index)=>{
+    render(){     
+        const productComponents = this.state.products.map((product, index)=>{
             return(
                 <Product key={index}
                     id={product.id}
