@@ -5,9 +5,7 @@ export class TimeList extends Component {
     render(){
         return(
             <div>
-                TimeList
                 <Timer/>
-
             </div>
         )
     }
