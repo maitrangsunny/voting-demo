@@ -7,7 +7,10 @@ export class TimersDashBoard extends Component {
         return(
             <div>
                 <EditableTimerList/>
-                <ToggleableTimerForm isOpen={true}/>
+                <ToggleableTimerForm 
+                    isOpen={true}
+                    onFormSubmit
+                />
             </div>
         )
     }
